@@ -16,7 +16,26 @@ function App() {
     }
   }
 
- 
+  function randomNumArray() {
+    let valueArr = [];
+    for (let i = 0; i < 10; i++) {
+      valueArr.push(
+        generateDie())
+    }
+    return valueArr;
+  }
+
+  function holdDice(id) {
+    setDiceValue(dieValue.map(die => {
+      return die.id === id ?
+        {
+          ...die,
+          isHeld: !die.isHeld
+        }
+        : die;
+    }));
+  }
+
   const dieElements = dieValue.map(die => {
     return (
       <Dice key={die.id} value={die.value} isHeld={die.isHeld} holdDice={() => holdDice(die.id)} />
@@ -25,7 +44,6 @@ function App() {
 
 
   function rollDie() {
-    counter++;
     setDiceValue(dieValue.map(die => {
       return die.isHeld ? die : generateDie()
     }
