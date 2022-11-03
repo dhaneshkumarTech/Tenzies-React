@@ -1,24 +1,48 @@
-import logo from './logo.svg';
 import './App.css';
+import Dice from './components/Dice';
+import React, { useState } from 'react';
+import { nanoid } from 'nanoid'
 
 function App() {
+
+  const counter = 0;
+  const [dieValue, setDiceValue] = useState(randomNumArray());
+
+  function generateDie() {
+    return {
+      value: Math.ceil(Math.random() * 6),
+      isHeld: false,
+      id: nanoid()
+    }
+  }
+
+ 
+  const dieElements = dieValue.map(die => {
+    return (
+      <Dice key={die.id} value={die.value} isHeld={die.isHeld} holdDice={() => holdDice(die.id)} />
+    )
+  });
+
+
+  function rollDie() {
+    counter++;
+    setDiceValue(dieValue.map(die => {
+      return die.isHeld ? die : generateDie()
+    }
+    ))
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <main>
+      <div className='die-container'>
+        {dieElements}
+      </div>
+      <button
+        onClick={() => rollDie()}
+        className='roll-btn'>
+        Roll
+      </button>
+    </main>
   );
 }
 
