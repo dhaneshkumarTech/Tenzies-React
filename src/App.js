@@ -7,6 +7,17 @@ function App() {
 
   const counter = 0;
   const [dieValue, setDiceValue] = useState(randomNumArray());
+  const [tenzies, setTenzies] = useState(false);
+
+  React.useEffect(() => {
+    const allHeld = dieValue.every(die => die.isHeld)
+    const firstValue = dieValue[0].value
+    const allSameValue = dieValue.every(die => die.value === firstValue)
+    if (allHeld && allSameValue) {
+      setTenzies(true)
+      console.log("You won!")
+    }
+  }, [dieValue])
 
   function generateDie() {
     return {
@@ -50,15 +61,20 @@ function App() {
     ))
   }
 
+  const btnName = tenzies ? 'New Game' : 'Roll Dice';
   return (
     <main>
+      <div className='about-game'>
+        <h1 className='title'>Tenzies</h1>
+        <p className='hint'>Roll untill all dice the same. Click each die to freeze it at its current value between rolls.</p>
+      </div>
       <div className='die-container'>
         {dieElements}
       </div>
       <button
         onClick={() => rollDie()}
         className='roll-btn'>
-        Roll
+        {btnName}
       </button>
     </main>
   );
