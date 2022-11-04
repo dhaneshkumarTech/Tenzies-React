@@ -60,8 +60,8 @@ main {
 }
 
 .roll-btn {
-  height: 50px;
-  width: 100px;
+  height: 40px;
+  width: 120px;
   border-radius: 10px;
   background-color: blue;
   color: white;
@@ -78,4 +78,26 @@ main {
 
 .roll-btn:active {
   box-shadow: inset 1px 5px 5px 1px rgba(0, 0, 0, 0.8);
+}
+.game-fact{
+  display: grid;
+  direction: column;
+  grid-template: auto / repeat(3, 1fr);
+  gap: 30px;
+  font-size: 1.2rem;
+  text-align: center;
+}
+  
+.rolls{
+  margin-top: 15px;
+  font-size: 14px;
+  font-family: "Karla", sans-serif;
+  
+  margin-left: 30px;
+}
+.your-rolls{
+  margin-top: 15px;
+  font-size: 14px;
+  font-family: "Karla", sans-serif;
+  margin-right: 18px;
 }
